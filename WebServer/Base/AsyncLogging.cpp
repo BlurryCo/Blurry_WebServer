@@ -27,7 +27,9 @@ void AsynecLogging::threadFunc(){
             MutexLockGuard lock(mutex_);
             //Two ways, 3 seconds or currentBuffer is full
             if (buffers_.empty())
+            {
                 cond_.waitForSeconds(flushInterval_);
+            }
             buffers_.push_back(std::move(currentBuffer_));
             currentBuffer_ = std::move(newBuffer1);
 
